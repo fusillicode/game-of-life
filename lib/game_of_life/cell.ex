@@ -9,23 +9,23 @@ defmodule GameOfLife.Cell do
     GenServer.call(pid, :alive?)
   end
 
+  def coords(pid) do
+    GenServer.call(pid, :coords)
+  end
+
   def x(pid) do
-    GenServer.call(pid, :x)
+    coords(pid) |> Enum.fetch!(0)
   end
 
   def y(pid) do
-    GenServer.call(pid, :y)
+    coords(pid) |> Enum.fetch!(1)
   end
 
   def handle_call(:alive?, _from, [state: state, coords: _]) do
     {:reply, state, state}
   end
 
-  def handle_call(:x, _from, [state: _, coords: [x,_]]) do
-    {:reply, x, x}
-  end
-
-  def handle_call(:y, _from, [state: _, coords: [_,y]]) do
-    {:reply, y, y}
+  def handle_call(:coords, _from, [state: _, coords: coords]) do
+    {:reply, coords, coords}
   end
 end
