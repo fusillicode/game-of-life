@@ -6,10 +6,10 @@ defmodule GameOfLife.Cell do
   end
 
   def alive?(pid) do
-    GenServer.call(pid, :state)
+    GenServer.call(pid, :alive?)
   end
 
-  def handle_call(:state, _from, state) do
+  def handle_call(:alive?, _from, state) do
     {:reply, state, state}
   end
 end
