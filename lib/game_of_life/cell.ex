@@ -1,6 +1,10 @@
 defmodule GameOfLife.Cell do
   use GenServer
 
+  def start_link state, coords do
+    new state, coords
+  end
+
   def new(state, coords) do
     GenServer.start_link(__MODULE__, [state: state, coords: coords])
   end
